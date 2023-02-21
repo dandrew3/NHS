@@ -18,7 +18,7 @@ public class LoginPage {
     WebElement password;
 
     @FindBy(xpath = "//button[.='Sign in']")
-    WebElement loginButton;
+    WebElement signInButton;
 
     public Boolean userNameFieldIsEmpty() {
         return userName.getText().isEmpty() && password.getText().isEmpty();
@@ -27,8 +27,10 @@ public class LoginPage {
     public void userLogin(String userName, String password) {
         this.userName.sendKeys(userName);
         this.password.sendKeys(password);
-        loginButton.click();
     }
+public void clickSignInButton(){
+        signInButton.click();
+}
 
 
 }
