@@ -78,7 +78,30 @@ public class LogInStepDef {
         for (WebElement room : dashboardPage.getRooms()) {
             Assert.assertTrue(room.isDisplayed());
         }
-//
+    }
+
+    @When("{int} Patient Cards is visible for user")
+    public void patient_cards_is_visible_for_user(int expectedPatientCards) {
+        Assert.assertEquals(expectedPatientCards, dashboardPage.getPatientCards().size());
+
+    }
+
+    @When("information of patients with rooms is displayed")
+    public void information_of_patients_with_rooms_is_displayed() {
+        for (WebElement info : dashboardPage.getInformationOfPatientsWithRooms()){
+            Assert.assertTrue(info.isDisplayed());
+        }
+    }
+
+    @Then("headers of Patients with rooms has the right information")
+    public void headers_of_patients_with_rooms_has_the_right_information(DataTable dataTable) {
+        List<String> expectedHeaders = dataTable.asList();
+        List<WebElement> actualHeadersOfPatientWithRoomsCard = dashboardPage.getActualHeadersOfPatientWithRoomsCard();
+        for (int i = 0; i < actualHeadersOfPatientWithRoomsCard.size(); i++){
+            Assert.assertEquals(expectedHeaders.get(i),actualHeadersOfPatientWithRoomsCard.get(i).getText().trim());
+            System.out.println(expectedHeaders.get(i));
+            System.out.println(actualHeadersOfPatientWithRoomsCard.get(i).getText().trim());
+        }
     }
 
 
