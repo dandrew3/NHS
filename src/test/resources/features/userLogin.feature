@@ -27,7 +27,7 @@ Feature: Sign-in functionality
   Scenario Outline: TC_03 NHS Negative Login test with a blank password
     When the user enters the credentials '<admin>' and '<password>'
     And the user clicks the SignIn button
-    #Then user validates the error message
+    # Then user validates the error message
     Examples:
       | admin | password |
       | admin |          |

@@ -25,6 +25,18 @@ public class DashboardPage {
     @FindBy(xpath = "//div[@class='panel-heading']")
     List<WebElement> rooms;
 
+    @FindBy(xpath = "//table[@id='patients-in-hospital']//td")
+    List<WebElement> informationOfPatientsWithRooms;
+    @FindBy(xpath = "//div[@class='dataTables_wrapper form-inline dt-bootstrap no-footer']")
+    List<WebElement> patientCards;
+
+    @FindBy(xpath = "//th[@tabindex='0' and @aria-controls='patients-in-hospital']")
+    List<WebElement> actualHeadersOfPatientWithRoomsCard;
+
+    public List<WebElement> getActualHeadersOfPatientWithRoomsCard() {
+        return actualHeadersOfPatientWithRoomsCard;
+    }
+
     public Integer actualAmountOfRoom() {
         return rooms.size();
     }
@@ -33,5 +45,12 @@ public class DashboardPage {
         return rooms;
     }
 
+    public List<WebElement> getPatientCards() {
+        return patientCards;
+    }
+
+    public List<WebElement> getInformationOfPatientsWithRooms() {
+        return informationOfPatientsWithRooms;
+    }
 
 }
