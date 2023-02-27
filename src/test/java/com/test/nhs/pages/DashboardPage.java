@@ -1,10 +1,13 @@
 package com.test.nhs.pages;
 
+import com.test.nhs.Utils.BrowserUtils;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class DashboardPage {
@@ -33,6 +36,12 @@ public class DashboardPage {
     @FindBy(xpath = "//th[@tabindex='0' and @aria-controls='patients-in-hospital']")
     List<WebElement> actualHeadersOfPatientWithRoomsCard;
 
+    @FindBy(xpath = "//a[contains(text(),'  Add patient')]")
+    WebElement addPatientMenuButton;
+
+    @FindBy(xpath = "//table[@id='patients-waiting']//tr[@role='row']")
+    List<WebElement> patientInformationInPatientWaitingRoom;
+
     public List<WebElement> getActualHeadersOfPatientWithRoomsCard() {
         return actualHeadersOfPatientWithRoomsCard;
     }
@@ -51,6 +60,23 @@ public class DashboardPage {
 
     public List<WebElement> getInformationOfPatientsWithRooms() {
         return informationOfPatientsWithRooms;
+    }
+
+    public void clickAddPatientButton() {
+        addPatientMenuButton.click();
+    }
+
+    public void checkPatientDetailsInWaitingCards(String expectedFirstName, String expectedLastName, String expectedHospitalNo) {
+        for (WebElement patient : patientInformationInPatientWaitingRoom) {
+            String actualPatientInfo = BrowserUtils.getTextMethod(patient);
+
+            if (actualPatientInfo.startsWith(expectedHospitalNo)) {
+                Assert.assertTrue(patient.isDisplayed());
+                Assert.assertTrue(actualPatientInfo.contains(expectedHospitalNo+" "+expectedFirstName+" "+expectedLastName));
+
+
+            }
+        }
     }
 
 }
